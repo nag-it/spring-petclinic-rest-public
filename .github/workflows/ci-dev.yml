@@ -1,4 +1,4 @@
-name: 00 Continuous Integration Development
+name: 00 CI Development
 
 on:
   workflow_dispatch:
@@ -62,6 +62,7 @@ jobs:
 
   docker:
     name: Build Docker Image
+    need: [build]
     permissions:
       contents: read
       packages: write
