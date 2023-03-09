@@ -106,7 +106,7 @@ class OwnerRestControllerTests {
 
         PetTypeDto petType = new PetTypeDto();
         petType.id(2)
-            .name("snoopdog");
+            .name("dog");
 
         pets = new ArrayList<>();
         PetDto pet = new PetDto();
@@ -153,7 +153,7 @@ class OwnerRestControllerTests {
     @WithMockUser(roles = "OWNER_ADMIN")
     void testGetOwnerSuccess() throws Exception {
         given(this.clinicService.findOwnerById(1)).willReturn(ownerMapper.toOwner(owners.get(0)));
-        this.mockMvc.perform(get("/api/owners/1")
+        this.mockMvc.perform(get("/api/owners/1111")
                 .accept(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isOk())
             .andExpect(content().contentType("application/json"))
