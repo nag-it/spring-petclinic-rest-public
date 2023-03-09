@@ -2,6 +2,11 @@ name: 00 CI Development
 
 on:
   workflow_dispatch:
+  workflow_call:
+    outputs:
+      image-tag:
+        description: "The image tag of the new docker image"
+        value: ${{ jobs.docker.outputs.image-tag }}
   push:
     branches:
       - 'feature/**'
@@ -99,4 +104,5 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
+  # deploy docker image to azure
      
