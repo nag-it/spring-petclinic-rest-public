@@ -44,5 +44,5 @@ jobs:
     #   contents: read
     needs: build
     name: SCA
-    uses: ./.github/workflows/sca.yml
+    uses: ./.github/workflows/sast.yml
     secrets: inherit
