@@ -37,6 +37,7 @@ jobs:
       issues: read
       checks: write
       pull-requests: write
+    needs: build
     name: License
     uses: ./.github/workflows/license.yml
     secrets: inherit
