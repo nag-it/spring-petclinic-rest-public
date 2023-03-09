@@ -107,7 +107,8 @@ jobs:
       uses: lewagon/wait-on-check-action@v1.3.1
       with:
         ref: ${{ github.ref }}
-        check-name: 'Build Docker Image'
+        running-workflow-name: '00 CI Development'
+        #check-name: 'Build Docker Image'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         wait-interval: 10
 
