@@ -31,6 +31,8 @@ jobs:
         if: always()
         with:
           junit_files: "license_finder_report.xml"
+          check_name: "License Finder Results"
+          comment_title: "License Finder Results"
 
       - name: Upload Dependency Review Report
         if: always()

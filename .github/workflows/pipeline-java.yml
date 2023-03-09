@@ -10,9 +10,12 @@ on:
 
 jobs:
   build:
+    # why we need to add permissions here???
     permissions:
       contents: read
+      issues: read
       checks: write
+      pull-requests: write
     name: Build
     uses: ./.github/workflows/build.yml
     secrets: inherit
@@ -31,18 +34,37 @@ jobs:
   license:
     permissions:
       contents: read
+      issues: read
       checks: write
+      pull-requests: write
     name: License
     uses: ./.github/workflows/license.yml
     secrets: inherit
 
-  sca:
+  sast:
     permissions:
       checks: write
       security-events: write
       actions: read
       contents: read
     needs: build
-    name: SCA
+    name: SAST
     uses: ./.github/workflows/sast.yml
     secrets: inherit
+
+  docker:
+    permissions:
+      contents: read
+      packages: write
+    needs: build
+    name: Build Image
+    uses: ./.github/workflows/docker.yml
+    secrets: inherit
+
+  container-image-scan:
+    needs: docker
+    name: Scan Image
+    uses: ./.github/workflows/container-image-scan.yml
+    secrets: inherit
+    with:
+      image-tag: ${{ needs.docker.outputs.image-tag }}

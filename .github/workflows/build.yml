@@ -42,7 +42,7 @@ jobs:
       #   with:
       #     path: ~/.m2/**/*.jar
       #     key: ${{ runner.os }}-m2
-      
+
       - uses: actions/upload-artifact@v3
         with:
           name: target
@@ -58,4 +58,6 @@ jobs:
         if: always()
         with:
           junit_files: "test-results/**/*.xml"
+          check_name: "Unit Test Results"
+          comment_title: "Unit Test Results"
                
