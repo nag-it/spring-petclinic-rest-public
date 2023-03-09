@@ -26,8 +26,7 @@ jobs:
       # - name: Build with Maven
       #   run: mvn clean package --batch-mode
         #run: mvn clean package -B -Dmaven.test.skip
-      #- name: Copy artifacts to staging directory
-      #  run: mkdir staging && cp target/*.jar staging
+      
 
       # save cache for later steps
       #
@@ -43,13 +42,6 @@ jobs:
       #   with:
       #     path: ~/.m2/**/*.jar
       #     key: ${{ runner.os }}-m2
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: app
-          path: ${{ github.workspace }}/staging
-          retention-days: 5
 
       - name: Test with Maven
         run: mvn test
@@ -73,3 +65,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                
+      # not needed if available in GitHub Packages..
+      - name: Copy artifacts to staging directory
+        run: mkdir staging && cp target/*.jar staging
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app
+          path: ${{ github.workspace }}/staging
+          retention-days: 5
