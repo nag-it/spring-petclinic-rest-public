@@ -27,18 +27,28 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -B -Dmaven.test.skip
       - run: mkdir staging && cp target/*.jar staging
+      - name: Cache Build
+        id: cache-build
+        uses: actions/cache@v3
+        with:
+          path: target
+          key: ${{ runner.os }}-target
+      - name: Cache Dependencies
+        id: cache-deps
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/**/*.jar
+          key: ${{ runner.os }}-m2
+      - uses: actions/upload-artifact@v3
+        with:
+          name: target
+          path: ${{ github.workspace }}/target
+          retention-days: 5
 
       # test
       - name: Test with Maven
         run: mvn test
       - run: mkdir test-results && cp target/*-reports/TEST-*.xml test-results
-
-      # upload
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Package
-          path: staging
-          retention-days: 10
       - name: Publish test results
         uses: EnricoMi/publish-unit-test-result-action@v2.0.0
         if: always()

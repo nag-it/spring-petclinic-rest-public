@@ -17,16 +17,16 @@ jobs:
     uses: ./.github/workflows/build.yml
     secrets: inherit
 
-  sca:
-    permissions:
-      checks: write
-      security-events: write
-      actions: read
-      contents: read
-    needs: build
-    name: SCA
-    uses: ./.github/workflows/sca.yml
-    secrets: inherit
+  # sca:
+  #   permissions:
+  #     checks: write
+  #     security-events: write
+  #     actions: read
+  #     contents: read
+  #   needs: build
+  #   name: SCA
+  #   uses: ./.github/workflows/sca.yml
+  #   secrets: inherit
 
   license:
     permissions:
@@ -34,4 +34,15 @@ jobs:
       checks: write
     name: License
     uses: ./.github/workflows/license.yml
+    secrets: inherit
+
+  sca:
+    # permissions:
+    #   checks: write
+    #   security-events: write
+    #   actions: read
+    #   contents: read
+    needs: build
+    name: SCA
+    uses: ./.github/workflows/sca.yml
     secrets: inherit
