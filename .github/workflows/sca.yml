@@ -6,16 +6,20 @@ on:
 
 jobs:
   sca:
+    name: SCA Java
     strategy:
       fail-fast: false
       matrix:
         os: [ "ubuntu-20.04"]
         language: [ "java" ]
     runs-on: ${{ matrix.os }}
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
     defaults:
       run:
         shell: bash
-    name: SCA Java
 
     steps:
     - name: Checkout repository

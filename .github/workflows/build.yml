@@ -39,6 +39,7 @@ jobs:
         with:
           name: Package
           path: staging
+          retention-days: 10
       - name: Publish test results
         uses: EnricoMi/publish-unit-test-result-action@v2.0.0
         if: always()
