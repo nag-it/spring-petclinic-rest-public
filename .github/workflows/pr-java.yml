@@ -1,0 +1,63 @@
+name: 00 Pull Request Java
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  build:
+    # why we need to add permissions here???
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+      packages: write
+    name: Build
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+
+  license:
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+    needs: build
+    name: License
+    uses: ./.github/workflows/license.yml
+    secrets: inherit
+
+  sast:
+    permissions:
+      checks: write
+      security-events: write
+      actions: read
+      contents: read
+    needs: build
+    name: SAST
+    uses: ./.github/workflows/sast.yml
+    secrets: inherit
+
+  docker:
+    permissions:
+      contents: read
+      packages: write
+    needs: build
+    name: Build Image
+    uses: ./.github/workflows/docker.yml
+    secrets: inherit
+
+  container-image-scan:
+    permissions:
+      checks: write
+      security-events: write
+      actions: read
+      contents: read
+      packages: read
+    needs: docker
+    name: Scan Image
+    uses: ./.github/workflows/container-image-scan.yml
+    secrets: inherit
+    with:
+      image-tag: ${{ needs.docker.outputs.image-tag }}

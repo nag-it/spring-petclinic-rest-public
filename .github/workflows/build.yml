@@ -23,11 +23,10 @@ jobs:
           cache: maven
 
       # compile
-      - name: Build with Maven
-        run: mvn clean package --batch-mode
+      # - name: Build with Maven
+      #   run: mvn clean package --batch-mode
         #run: mvn clean package -B -Dmaven.test.skip
-      #- name: Copy artifacts to staging directory
-      #  run: mkdir staging && cp target/*.jar staging
+      
 
       # save cache for later steps
       #
@@ -44,25 +43,20 @@ jobs:
       #     path: ~/.m2/**/*.jar
       #     key: ${{ runner.os }}-m2
 
-      # - name: Upload artifact
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: app
-      #     path: ${{ github.workspace }}/staging
-      #     retention-days: 5
-
       - name: Test with Maven
         run: mvn test
 
       - name: Copy test results
+        if: always()
         run: mkdir test-results && cp target/*-reports/TEST-*.xml test-results
 
       # https://github.com/EnricoMi/publish-unit-test-result-action
       - name: Publish test results
-        uses: EnricoMi/publish-unit-test-result-action@v2.0.0
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          junit_files: "test-results/**/*.xml"
+          files: |
+            test-results/**/*.xml
           check_name: "Unit Test Results"
           comment_title: "Unit Test Results"
 
@@ -71,3 +65,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                
+      # not needed if available in GitHub Packages..
+      - name: Copy artifacts to staging directory
+        run: mkdir staging && cp target/*.jar staging
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app
+          path: ${{ github.workspace }}/staging
+          retention-days: 5

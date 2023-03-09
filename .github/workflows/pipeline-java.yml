@@ -1,11 +1,11 @@
 name: 00 Build Pipeline Java
 
 on:
-  push:
-    branches: [ "main" ]
-    paths-ignore:
-      - '**/".md'
-      - '**/".txt'
+  # push:
+  #   branches: [ "main" ]
+  #   paths-ignore:
+  #     - '**/".md'
+  #     - '**/".txt'
   workflow_dispatch:
 
 jobs:
