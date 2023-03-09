@@ -38,6 +38,7 @@ jobs:
     - name: Pull Image
       run: docker pull ${{ env.IMAGE_NAME }}
 
+    # https://github.com/aquasecurity/trivy-action
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.7.1
       with:
@@ -46,6 +47,8 @@ jobs:
         template: '@/conrtib/sarif.tpl'
         output: 'trivy-results.sarif'
         severity: 'CRITICAL,HIGH'
+        hide-progress: false
+        timeout: 10m
 
     - name: Upload Trivy scan results to GitHub Security
       uses: github/codeql-action/upload-sarif@v2

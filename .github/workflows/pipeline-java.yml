@@ -63,6 +63,12 @@ jobs:
     secrets: inherit
 
   container-image-scan:
+    permissions:
+      checks: write
+      security-events: write
+      actions: read
+      contents: read
+      packages: read
     needs: docker
     name: Scan Image
     uses: ./.github/workflows/container-image-scan.yml
