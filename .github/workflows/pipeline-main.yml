@@ -1,0 +1,21 @@
+name: 00 - Main Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**/".md'
+      - '**/".txt'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+
+  sca:
+    needs: build
+    name: SCA
+    uses: ./.github/workflows/sca.yml
+    secrets: inherit

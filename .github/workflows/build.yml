@@ -6,13 +6,20 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build Java with Maven
+name: 10 Build
 
-on: push
+on:
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
 
   build:
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+    #runner
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,11 +29,22 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      # compile
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots package
+        run: mvn clean package -B -Dmaven.test.skip
       - run: mkdir staging && cp target/*.jar staging
+      # test
+      - name: Test with Maven
+        run: mvn test
+      - run: mkdir test-results && cp target/*-reports/TEST-*.xml test-results
+      # upload
       - uses: actions/upload-artifact@v3
         with:
           name: Package
           path: staging
-     
+      - name: Publish test results
+        uses: EnricoMi/publich-unit-test-result-action@v2.0.0
+        if: always()
+        with:
+          junit_files: "test-results/**/*.xml"
+               
