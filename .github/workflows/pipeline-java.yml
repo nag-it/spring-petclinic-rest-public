@@ -14,7 +14,7 @@ jobs:
       contents: read
       checks: write
     name: Build
-    uses: ./.github/workflows/java/10-build.yml
+    uses: ./.github/workflows/10-build.yml
     secrets: inherit
 
   sca:
@@ -25,7 +25,7 @@ jobs:
       contents: read
     needs: build
     name: SCA
-    uses: ./.github/workflows/java/20-sca.yml
+    uses: ./.github/workflows/20-sca.yml
     secrets: inherit
 
   license:
@@ -33,5 +33,5 @@ jobs:
       contents: read
       checks: write
     name: License
-    uses: ./.github/workflows/common/30-license.yml
+    uses: ./.github/workflows/30-license.yml
     secrets: inherit
