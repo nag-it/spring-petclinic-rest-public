@@ -62,7 +62,7 @@ jobs:
 
   docker:
     name: Build Docker Image
-    need: [build]
+    needs: build
     permissions:
       contents: read
       packages: write
