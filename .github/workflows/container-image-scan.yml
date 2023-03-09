@@ -34,18 +34,20 @@ jobs:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Pull Image
-      run: docker pull ${{ env.IMAGE_TAG }}
+      run: docker pull ${{ env.IMAGE_NAME }}
+
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.7.1
       with:
-        image-ref: ${{ env.IMAGE_TAG }}
+        image-ref: ${{ env.IMAGE_NAME }}
         format: 'template'
         template: '@/conrtib/sarif.tpl'
         output: 'trivy-results.sarif'
         severity: 'CRITICAL,HIGH'
 
-    - name: Upload Trivy scan results
+    - name: Upload Trivy scan results to GitHub Security
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: 'trivy-results.sarif'
