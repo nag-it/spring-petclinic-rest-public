@@ -51,14 +51,8 @@ jobs:
       #     path: ${{ github.workspace }}/staging
       #     retention-days: 5
 
-      # test
-      # - name: Test with Maven
-      #   run: mvn test
-
-      - name: Publish to GitHub Packages
-        run: mvn deploy --batch-mode
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test with Maven
+        run: mvn test
 
       - name: Copy test results
         run: mkdir test-results && cp target/*-reports/TEST-*.xml test-results
@@ -71,4 +65,9 @@ jobs:
           junit_files: "test-results/**/*.xml"
           check_name: "Unit Test Results"
           comment_title: "Unit Test Results"
+
+      - name: Publish to GitHub Packages
+        run: mvn deploy --batch-mode
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                

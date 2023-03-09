@@ -40,7 +40,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/nag-it/spring-petclinic-rest</url>
+            <url>https://maven.pkg.github.com/nag-it/spring-petclinic-rest-public</url>
         </repository>
     </distributionManagement>
 
