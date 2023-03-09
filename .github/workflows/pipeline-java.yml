@@ -1,4 +1,4 @@
-name: 00 Build Pipeline
+name: 00 Build Pipeline Java
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
       contents: read
       checks: write
     name: Build
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/java/10-build.yml
     secrets: inherit
 
   sca:
@@ -25,5 +25,13 @@ jobs:
       contents: read
     needs: build
     name: SCA
-    uses: ./.github/workflows/sca.yml
+    uses: ./.github/workflows/java/20-sca.yml
+    secrets: inherit
+
+  license:
+    permissions:
+      contents: read
+      checks: write
+    name: License
+    uses: ./.github/workflows/common/30-license.yml
     secrets: inherit
