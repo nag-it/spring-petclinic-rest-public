@@ -15,6 +15,7 @@ env:
 jobs:
 
   docker:
+    name: Build Docker Image
     outputs:
       image-tag: ${{ steps.meta.outputs.tags }}
     runs-on: ubuntu-latest
@@ -26,7 +27,7 @@ jobs:
     - name: Download application binary
       uses: actions/download-artifact@v3.0.0
       with:
-        name: target
+        name: app
         path: target
 
     - name: Log in to the Container Registry

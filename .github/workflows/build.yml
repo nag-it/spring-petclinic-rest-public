@@ -44,7 +44,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: target
+          name: app
           path: ${{ github.workspace }}/staging
           retention-days: 5
 
@@ -52,6 +52,8 @@ jobs:
       - name: Test with Maven
         run: mvn test
       - run: mkdir test-results && cp target/*-reports/TEST-*.xml test-results
+
+      # https://github.com/EnricoMi/publish-unit-test-result-action
       - name: Publish test results
         uses: EnricoMi/publish-unit-test-result-action@v2.0.0
         if: always()

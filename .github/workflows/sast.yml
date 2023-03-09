@@ -18,7 +18,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       
-    # Initializes the CodeQL tools for scanning.
+    # https://github.com/github/codeql-action
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
