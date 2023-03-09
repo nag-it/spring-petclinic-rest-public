@@ -54,8 +54,8 @@ jobs:
       - name: Test with Maven
         run: mvn test
 
-      # - name: Copy test results
-      #   run: mkdir test-results && cp target/*-reports/TEST-*.xml test-results
+      - name: Copy test results
+        run: mkdir test-results && cp target/*-reports/TEST-*.xml test-results
 
       # https://github.com/EnricoMi/publish-unit-test-result-action
       - name: Publish test results
