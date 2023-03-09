@@ -15,8 +15,6 @@ on:
 jobs:
 
   build:
-    permissions:
-      checks: write
     #runner
     runs-on: ubuntu-latest
     steps:
