@@ -7,6 +7,12 @@ on:
 jobs:
   build:
     name: Build
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+      packages: write
     uses: ./.github/workflows/ci-dev.yml
     secrets: inherit
 
