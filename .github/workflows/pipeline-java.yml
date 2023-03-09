@@ -37,11 +37,11 @@ jobs:
     secrets: inherit
 
   sca:
-    # permissions:
-    #   checks: write
-    #   security-events: write
-    #   actions: read
-    #   contents: read
+    permissions:
+      checks: write
+      security-events: write
+      actions: read
+      contents: read
     needs: build
     name: SCA
     uses: ./.github/workflows/sast.yml
