@@ -13,10 +13,6 @@ jobs:
         os: [ "ubuntu-20.04"]
         language: [ "java" ]
     runs-on: ${{ matrix.os }}
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
     defaults:
       run:
         shell: bash

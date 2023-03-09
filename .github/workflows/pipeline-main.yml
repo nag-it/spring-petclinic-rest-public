@@ -19,8 +19,10 @@ jobs:
 
   sca:
     permissions:
-      contents: read
       checks: write
+      security-events: write
+      actions: read
+      contents: read
     needs: build
     name: SCA
     uses: ./.github/workflows/sca.yml
