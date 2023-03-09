@@ -62,10 +62,10 @@ jobs:
     uses: ./.github/workflows/docker.yml
     secrets: inherit
 
-  # container-image-scan:
-  #   needs: docker
-  #   name: Scan Image
-  #   uses: ./.github/workflows/container-image-scan.yml
-  #   secrets: inherit
-  #   with:
-  #     image-tag: ${{ needs.docker.outputs.image-tag }}
+  container-image-scan:
+    needs: docker
+    name: Scan Image
+    uses: ./.github/workflows/container-image-scan.yml
+    secrets: inherit
+    with:
+      image-tag: ${{ needs.docker.outputs.image-tag }}
