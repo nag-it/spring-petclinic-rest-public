@@ -1,4 +1,4 @@
-name: 00 Pull Request Java
+name: 00 Pull Request Pre Check
 
 on:
   workflow_dispatch:

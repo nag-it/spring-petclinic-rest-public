@@ -1,4 +1,4 @@
-name: 00 Continuous Integration Java
+name: 00 Continuous Integration
 
 on:
   workflow_dispatch:
