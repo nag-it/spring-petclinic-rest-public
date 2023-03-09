@@ -55,6 +55,7 @@ jobs:
         run: mvn test
 
       - name: Copy test results
+        if: always()
         run: mkdir test-results && cp target/*-reports/TEST-*.xml test-results
 
       # https://github.com/EnricoMi/publish-unit-test-result-action
