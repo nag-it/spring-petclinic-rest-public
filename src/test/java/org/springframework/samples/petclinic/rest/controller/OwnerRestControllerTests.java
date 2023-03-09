@@ -153,7 +153,7 @@ class OwnerRestControllerTests {
     @WithMockUser(roles = "OWNER_ADMIN")
     void testGetOwnerSuccess() throws Exception {
         given(this.clinicService.findOwnerById(1)).willReturn(ownerMapper.toOwner(owners.get(0)));
-        this.mockMvc.perform(get("/api/owners/1111")
+        this.mockMvc.perform(get("/api/owners/1")
                 .accept(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isOk())
             .andExpect(content().contentType("application/json"))
@@ -165,7 +165,7 @@ class OwnerRestControllerTests {
     @WithMockUser(roles = "OWNER_ADMIN")
     void testGetOwnerNotFound() throws Exception {
         given(this.clinicService.findOwnerById(2)).willReturn(null);
-        this.mockMvc.perform(get("/api/owners/22222")
+        this.mockMvc.perform(get("/api/owners/2")
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNotFound());
     }

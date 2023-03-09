@@ -1,4 +1,4 @@
-name: 00 Pull Request Check Java
+name: 00 Pull Request Java
 
 on:
   workflow_dispatch:
@@ -16,17 +16,6 @@ jobs:
     name: Build
     uses: ./.github/workflows/build.yml
     secrets: inherit
-
-  # sca:
-  #   permissions:
-  #     checks: write
-  #     security-events: write
-  #     actions: read
-  #     contents: read
-  #   needs: build
-  #   name: SCA
-  #   uses: ./.github/workflows/sca.yml
-  #   secrets: inherit
 
   license:
     permissions:
