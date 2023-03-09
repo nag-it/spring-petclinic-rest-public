@@ -96,8 +96,6 @@ jobs:
       packages: read
     needs: build
     runs-on: ubuntu-latest
-    with:
-      image-tag: ${{ needs.docker.outputs.image-tag }}
     
     steps:
     - name: Checkout repository
@@ -111,12 +109,12 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Pull Image
-      run: docker pull ${{ env.IMAGE_NAME }}
+      run: docker pull ${{ needs.docker.outputs.image-tag || github.event.inputs.image-tag }}
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.7.1
       with:
-        image-ref: ${{ env.IMAGE_NAME }}
+        image-ref: ${{ needs.docker.outputs.image-tag || github.event.inputs.image-tag }}
         format: 'sarif'
         output: 'trivy-results.sarif'
         severity: 'CRITICAL,HIGH'
