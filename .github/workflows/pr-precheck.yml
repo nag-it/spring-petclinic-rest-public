@@ -108,7 +108,7 @@ jobs:
       with:
         ref: ${{ github.ref }}
         running-workflow-name: 'docker'
-        #check-name: 'Build Docker Image'
+        check-name: 'docker'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         wait-interval: 10
 
