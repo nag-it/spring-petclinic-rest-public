@@ -43,8 +43,7 @@ jobs:
       uses: aquasecurity/trivy-action@0.7.1
       with:
         image-ref: ${{ env.IMAGE_NAME }}
-        format: 'template'
-        template: '@/conrtib/sarif.tpl'
+        format: 'sarif'
         output: 'trivy-results.sarif'
         severity: 'CRITICAL,HIGH'
         hide-progress: false
