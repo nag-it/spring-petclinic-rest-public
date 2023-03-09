@@ -1,4 +1,4 @@
-name: 00 - Main Pipeline
+name: 00 Build Pipeline
 
 on:
   push:
