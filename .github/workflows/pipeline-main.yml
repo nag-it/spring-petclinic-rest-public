@@ -11,12 +11,16 @@ on:
 jobs:
   build:
     permissions:
+      contents: read
       checks: write
     name: Build
     uses: ./.github/workflows/build.yml
     secrets: inherit
 
   sca:
+    permissions:
+      contents: read
+      checks: write
     needs: build
     name: SCA
     uses: ./.github/workflows/sca.yml

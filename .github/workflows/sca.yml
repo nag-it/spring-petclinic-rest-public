@@ -15,7 +15,7 @@ jobs:
     defaults:
       run:
         shell: bash
-    name: SCA Java project
+    name: SCA Java
 
     steps:
     - name: Checkout repository
