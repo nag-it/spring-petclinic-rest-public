@@ -38,7 +38,7 @@ jobs:
           cache: maven
 
       - name: Test with Maven
-        run: mvn test
+        run: mvn package --batch-mode
 
       - name: Copy test results
         if: always()
