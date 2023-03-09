@@ -17,16 +17,48 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-    - uses: actions/cache@v3
-      with:
-        path: target
-        key: ${{ runner.os }}-target
-
+      
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
+
+    # use from cached build instead of new buid!!
+    # - uses: actions/cache@v3
+    #   with:
+    #     path: target
+    #     key: ${{ runner.os }}-target
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build with Maven
+      run: mvn clean package -B -Dmaven.test.skip
+
+    - name: Cache Build
+      id: cache-build
+      uses: actions/cache@v3
+      with:
+        path: target
+        key: ${{ runner.os }}-target
+    - name: Cache Dependencies
+      id: cache-deps
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2/**/*.jar
+        key: ${{ runner.os }}-m2
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: target
+        path: ${{ github.workspace }}/target
+        retention-days: 5
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
