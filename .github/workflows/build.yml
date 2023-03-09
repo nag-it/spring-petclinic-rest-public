@@ -31,7 +31,7 @@ jobs:
         id: cache-build
         uses: actions/cache@v3
         with:
-          path: target
+          path: staging
           key: ${{ runner.os }}-target
       - name: Cache Dependencies
         id: cache-deps
@@ -42,7 +42,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: target
-          path: ${{ github.workspace }}/target
+          path: ${{ github.workspace }}/staging
           retention-days: 5
 
       # test
