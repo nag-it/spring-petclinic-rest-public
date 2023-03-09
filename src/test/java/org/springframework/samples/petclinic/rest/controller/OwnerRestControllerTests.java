@@ -165,7 +165,7 @@ class OwnerRestControllerTests {
     @WithMockUser(roles = "OWNER_ADMIN")
     void testGetOwnerNotFound() throws Exception {
         given(this.clinicService.findOwnerById(2)).willReturn(null);
-        this.mockMvc.perform(get("/api/owners/2")
+        this.mockMvc.perform(get("/api/owners/22222")
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNotFound());
     }
