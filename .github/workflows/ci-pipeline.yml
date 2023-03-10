@@ -2,13 +2,13 @@ name: 00 Continuous Integration
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - 'feature/**'
-      - 'hotfix/**'
-    paths-ignore:
-      - '**/".md'
-      - '**/".txt'
+#  push:
+#    branches:
+#      - 'feature/**'
+#      - 'hotfix/**'
+#    paths-ignore:
+#      - '**/".md'
+#      - '**/".txt'
 
 jobs:
   build:
