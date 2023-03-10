@@ -17,7 +17,7 @@ jobs:
      checks: write
      pull-requests: write
      packages: write
-   uses: ./.github/workflows/ci-dev.yml
+   uses: ./.github/workflows/build.yml
    secrets: inherit
 
   license-finder:
@@ -104,15 +104,6 @@ jobs:
     needs: build
     
     steps:
-    - name: Wait for Docker image to be created
-      uses: lewagon/wait-on-check-action@v1.3.1
-      with:
-        ref: ${{ github.ref }}
-        running-workflow-name: 'docker'
-        check-name: 'docker'
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        wait-interval: 10
-
     - name: Checkout repository
       uses: actions/checkout@v3
 
