@@ -11,13 +11,13 @@ permissions: read-all
 jobs:
 
   build:
-    permissions:
-      checks: write
-      pull-requests: write
-      security-events: write
-      packages: write
-      actions: read
-      contents: read
+    # permissions:
+    #   checks: write
+    #   pull-requests: write
+    #   security-events: write
+    #   packages: write
+    #   actions: read
+    #   contents: read
     name: Build
     uses: ./.github/workflows/ci-dev.yml
     secrets: inherit
