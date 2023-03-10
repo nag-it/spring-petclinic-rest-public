@@ -1,6 +1,7 @@
 name: 00 CI Development
 
 on:
+  workflow_call:
   workflow_dispatch:
   push:
     branches-ignore:
