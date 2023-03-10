@@ -12,7 +12,8 @@ jobs:
 
   build:
     permissions:
-      contents: read
+      checks: write
+      pull-requests: write
     name: Build
     uses: ./.github/workflows/ci-dev.yml
     secrets: inherit
