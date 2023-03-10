@@ -134,6 +134,7 @@ jobs:
         severity: 'CRITICAL,HIGH'
         hide-progress: false
         timeout: 10m
+        scanner: license
 
     - name: Upload Trivy scan results to GitHub Security
       uses: github/codeql-action/upload-sarif@v2
