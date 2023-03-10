@@ -6,18 +6,17 @@ on:
     branches:
       - 'main'
 
-permissions: read-all
-
 jobs:
 
   build:
     permissions:
-      checks: write
-      pull-requests: write
-      security-events: write
-      packages: write
-      actions: read
       contents: read
+      issues: read
+      checks: write
+      actions: read
+      pull-requests: write
+      packages: write
+      security-events: write
     name: Build
     uses: ./.github/workflows/ci-dev.yml
     secrets: inherit
@@ -26,6 +25,7 @@ jobs:
 
     name: Publish Java Artifact
     permissions:
+      contents: read
       packages: write
     runs-on: ubuntu-latest
 
