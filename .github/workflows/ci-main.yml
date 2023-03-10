@@ -1,14 +1,27 @@
-name: 20 Deploy
+name: 00 CI Main
 
 on:
   workflow_dispatch:
-  workflow_call:
+  push:
+    branches:
+      - 'main'
+
+permissions: read-all
 
 jobs:
 
   build:
+    permissions:
+      contents: read
+    name: Build
+    uses: ./.github/workflows/ci-dev.yml
+    secrets: inherit
 
-    name: Deploy Java
+  publish:
+
+    name: Publish Java Artifact
+    permissions:
+      packages: write
     runs-on: ubuntu-latest
 
     steps:
@@ -26,14 +39,3 @@ jobs:
         run: mvn deploy --batch-mode
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-               
-      # not needed if available in GitHub Packages..
-      - name: Copy artifacts to staging directory
-        run: mkdir staging && cp target/*.jar staging
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: app
-          path: ${{ github.workspace }}/staging
-          retention-days: 5
