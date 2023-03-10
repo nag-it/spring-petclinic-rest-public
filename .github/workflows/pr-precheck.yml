@@ -101,6 +101,7 @@ jobs:
       contents: read
       packages: read
     runs-on: ubuntu-latest
+    needs: build
     
     steps:
     - name: Wait for Docker image to be created
