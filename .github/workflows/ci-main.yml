@@ -16,6 +16,8 @@ jobs:
       pull-requests: write
       security-events: write
       packages: write
+      actions: read
+      contents: read
     name: Build
     uses: ./.github/workflows/ci-dev.yml
     secrets: inherit
