@@ -82,7 +82,7 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
 
   deploy-to-azure:
-    name: Container Image Scan
+    name: Deploy to Azure
     permissions:
       packages: read
     runs-on: ubuntu-latest
