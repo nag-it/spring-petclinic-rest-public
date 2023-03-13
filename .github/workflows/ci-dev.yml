@@ -4,8 +4,8 @@ on:
   workflow_call:
   workflow_dispatch:
   push:
-    # branches-ignore:
-    #   - 'main'
+    branches-ignore:
+      - 'main'
     paths-ignore:
       - '**/".md'
       - '**/".txt'
