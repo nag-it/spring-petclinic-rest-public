@@ -84,15 +84,18 @@ jobs:
         with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
-      - name: Analyze with SonarCloud
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args:
-            -Dsonar.projectKey=nag_it${{ github.event.repository.name }}
-            -Dsonar.organization=nag-it
+      - name: Test with Maven
+        run: mvn clean verify sonar:sonar
+
+      # - name: Analyze with SonarCloud
+      #   uses: SonarSource/sonarcloud-github-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   with:
+      #     args:
+      #       -Dsonar.projectKey=nag_it${{ github.event.repository.name }}
+      #       -Dsonar.organization=nag-it
 
   license-finder:
     name: License Finder
