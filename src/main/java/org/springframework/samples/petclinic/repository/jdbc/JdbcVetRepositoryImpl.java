@@ -128,7 +128,8 @@ public class JdbcVetRepositoryImpl implements VetRepository {
 					});
 			for (int specialtyId : vetSpecialtiesIds) {
 				Specialty specialty = EntityUtils.getById(specialties, Specialty.class, specialtyId);
-				vet.addSpecialty(specialty);
+				if(vet != null)	vet.addSpecialty(specialty);
+
 			}
 
 		} catch (EmptyResultDataAccessException ex) {
